@@ -1,6 +1,14 @@
 <?php
 class UsersController extends AppController {
     
+    public function beforeFilter() {
+        $this->Auth->allow('login');
+    }
+    
+    public function index(){
+        
+    }
+    
     public function login() {
         if($this->request->is('post')) {
             if($this->Auth->login()) {
