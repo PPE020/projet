@@ -1,3 +1,4 @@
+<?php debug($room); ?>
 <div class="row">
     <h2><?php echo $room['Room']['name']; ?></h2>
     <div>
@@ -26,16 +27,11 @@
 
 <div>
     <h2>Disponibilité</h2>
-    <?php 
-
-    debug(date("d-m-Y", strtotime($room['Reservation'][2]['date_reservation'])));
-    debug(date("d-m-Y", time()));
-
-    ?>
         <table>
             <tr>
-                <th></th>
+                <th>DATE</th>
                 <?php 
+                $joursemaine = array("LUN", "MAR", "MER", "JEU", "VEN", "SAM", "DIM" );
                 for($i = 0;$i<18;$i++){
                     ?>
                     <th>
@@ -49,7 +45,7 @@
             $i = 1;
             while($i<date("N")){ 
                 $d = date("N")-$i;
-                echo "<tr><td>".date("d/m/Y", strtotime('-'.$d.'day', time()))."</td>";
+                echo "<tr><td>".date("d/m/Y", strtotime('-'.$d.'day', time())).' ['.$joursemaine[date("N", strtotime('-'.$d.'day', time()))-1].'] </td>';
                 for($c = 0;$c<18;$c++){ ?>
                 <td style="background-color:lightgrey; } ?>;"></td>
                 <?php }
@@ -57,7 +53,7 @@
                 $i++;
             }
             if($i==date('N')){
-                echo "<tr><td>".date("d/m/Y", time())."</td>";
+                echo "<tr><td>".date("d/m/Y", time()).' ['.$joursemaine[date("N", time())-1]."]</td>";
                 for($c = 0;$c<18;$c++){ ?>
                     <td style="background-color:<?php
                         $style='green';
@@ -76,7 +72,7 @@
             }
             while($i<=7){
                 $d = $i-date("N");
-                echo "<tr><td>".date("d/m/Y", strtotime('+'.$d.'day', time()))."</td>";
+                echo "<tr><td>".date("d/m/Y", strtotime('+'.$d.'day', time())).' ['.$joursemaine[date("N", strtotime('+'.$d.'day', time()))-1].'] </td>';
                 for($c = 0;$c<18;$c++){ ?>
                         <td style="background-color:<?php
                         $style = " green ";
@@ -98,5 +94,7 @@
         ?>
 
         </table>
+    
+    <?php echo $this->Html->link('Réserver', array('controller' => 'rooms', 'action' => 'booking', $room['Room']['id'])); ?>
 
 </div>

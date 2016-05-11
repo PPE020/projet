@@ -24,6 +24,8 @@ class RoomsController extends AppController {
     }
     
     public function booking($id) {
-        
+        $id = $this->request['pass']['0'];
+        $room = $this->Room->find('first', array('conditions' =>(array('room.id' => $id))));
+        $this->set('room', $room);
     }
 }
