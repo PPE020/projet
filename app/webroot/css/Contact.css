@@ -1,0 +1,14 @@
+button.btn {
+	
+    background: #333 ;
+    
+}
+.form-top-right {
+	
+	opacity: 0.7;
+}
+
+body{
+    background-image: url(../img/2.jpg);
+    background-size: cover;
+}
